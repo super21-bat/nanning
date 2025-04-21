@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一周健康减肥饮食计划</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4A90E2; /* 柔和的蓝色 */
+            --secondary-color: #50E3C2; /* 清新的薄荷绿 */
+            --accent-color: #F5A623; /* 温暖的橙色 */
+            --text-color-dark: #333333;
+            --text-color-light: #666666;
+            --background-light: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --border-color: #E5E7EB;
+        }
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-color-dark);
+            background-color: var(--background-light);
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 600;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        .meal-icon {
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+            width: 1.25em;
+            text-align: center;
+        }
+        .calorie-tag {
+            background-color: rgba(80, 227, 194, 0.1);
+            color: #2d8a74;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 0.5rem;
+            border: 1px solid rgba(80, 227, 194, 0.3);
+        }
+        .ingredient-list li::before {
+            content: "•";
+            color: var(--primary-color);
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            font-weight: bold;
+        }
+        .instructions {
+            line-height: 1.7;
+            color: var(--text-color-light);
+        }
+        .disclaimer {
+            background-color: #fffbeb;
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+            color: #92400e;
+        }
+        .day-container {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+        }
+        .total-calories {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-color);
+            text-align: right;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Hero Section -->
+    <div class="hero py-12 px-4 text-center mb-12">
+        <div class="container mx-auto max-w-4xl">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white"><i class="fas fa-carrot mr-2"></i> 一周健康减肥饮食计划 <i class="fas fa-apple-alt ml-2"></i></h1>
+            <p class="text-lg md:text-xl font-light text-white opacity-90 max-w-3xl mx-auto">
+                为 H 先生和 W 女士精心设计的低热量、营养均衡的减肥餐单。请注意控制份量，开启健康生活！
+            </p>
+            <p class="text-sm mt-2 text-white opacity-80">目标热量: H: 约 1800-2000 大卡/天 | W: 约 1200-1400 大卡/天</p>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 pb-12 max-w-4xl">
+        <!-- Disclaimer -->
+        <div class="disclaimer text-sm">
+            <h4 class="font-semibold mb-2 text-base"><i class="fas fa-exclamation-triangle mr-2"></i>重要提示 - 关于热量</h4>
+            <p>以下提供的热量值是 <strong>估算值 (约)</strong>。实际热量会因食材的具体品种、品牌、烹饪方式（尤其是用油量）以及个人测量的精确度而略有差异。重点在于遵循计划中的<strong>食物种类和克数</strong>来进行份量控制，热量值是帮助您理解每餐大致能量摄入的参考。所有“剩菜改造”的午餐热量与前一天晚餐的热量估算值相同。</p>
+        </div>
+
+        <!-- Weekly Plan -->
+        <div class="space-y-10">
+            <!-- Monday -->
+            <div class="card day-container">
+                <h2 class="text-2xl font-semibold mb-6 border-b pb-3 border-gray-200 flex items-center">
+                    <i class="far fa-calendar-alt mr-3 text-xl text-primary-color"></i> 星期一 (Monday, April 21, 2025)
+                </h2>
+                <div class="space-y-6">
+                    <!-- Breakfast -->
+                    <div class="meal-item">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-coffee meal-icon"></i>早餐</h4>
+                        <span class="calorie-tag">H: 约 400 大卡 / W: 约 255 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>燕麦片(干 H:60g, W:40g)</li>
+                                <li>预备好的 水煮蛋 1个 (H&W)</li>
+                                <li>原味坚果 (H:10g, W:5g)</li>
+                                <li>水/低脂奶</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">快速煮燕麦片。搭配坚果和预备好的水煮蛋。</p>
+                        </div>
+                    </div>
+                    <!-- Lunch -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-utensils meal-icon"></i>午餐 (鸡肉藜麦沙拉碗)</h4>
+                        <span class="calorie-tag">H: 约 580 大卡 / W: 约 380 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>预备好的 熟藜麦 (H:150g, W:100g)</li>
+                                <li>预备好的 熟鸡胸肉 (H:150g, W:100g)</li>
+                                <li>预备好的 洗净混合绿叶菜 (H:200g, W:150g)</li>
+                                <li>预备好的 切块彩椒/胡萝卜丝 (适量)</li>
+                                <li>预备好的 沙拉酱汁 (含油 H:约10ml, W:约5ml)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">在碗中混合所有食材，淋上预备好的沙拉酱汁即可。</p>
+                        </div>
+                    </div>
+                    <!-- Dinner -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-concierge-bell meal-icon"></i>晚餐 (烤鸡胸 + 烤蔬菜)</h4>
+                        <span class="calorie-tag">H: 约 545 大卡 / W: 约 345 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>预备好的 熟鸡胸肉 (按生重 H:180g, W:120g 份量)</li>
+                                <li>预备好的 西兰花小朵 (H:200g, W:150g)</li>
+                                <li>新鲜 红薯 (洗净切块 H:200g, W:120g)</li>
+                                <li>橄榄油 (H:约10ml, W:约5ml)</li>
+                                <li>盐, 胡椒粉, 香料</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">将红薯块和西兰花朵与少量橄榄油、盐、胡椒、香料混合，铺在烤盘上，放入预热200°C的烤箱烤约20-25分钟或至软。在最后5-10分钟，将预备好的鸡胸肉放入烤箱一起加热，或单独用微波炉/平底锅加热 (确保份量对应生重计划)。</p>
+                        </div>
+                    </div>
+                    <!-- Snack -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-lemon meal-icon"></i>加餐 (可选)</h4>
+                        <span class="calorie-tag">H: 约 80 大卡 / W: 约 60 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>H: 苹果 1个 (约150g)</li>
+                                <li>W: 小苹果 1个 (约100g)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Daily Total -->
+                    <div class="total-calories">
+                        <p class="font-semibold text-primary-color">全天总计 (估算, 不含加餐):</p>
+                        <p class="text-gray-700">H: 约 1525 大卡 / W: 约 980 大卡</p>
+                        <p class="text-xs text-gray-500 mt-1">*实际摄入量可能因烹饪和测量误差略高，更接近目标范围。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tuesday -->
+            <div class="card day-container">
+                <h2 class="text-2xl font-semibold mb-6 border-b pb-3 border-gray-200 flex items-center">
+                    <i class="far fa-calendar-alt mr-3 text-xl text-primary-color"></i> 星期二 (Tuesday, April 22, 2025)
+                </h2>
+                <div class="space-y-6">
+                    <!-- Breakfast -->
+                    <div class="meal-item">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-egg meal-icon"></i>早餐 (炒蛋)</h4>
+                        <span class="calorie-tag">H: 约 180 大卡 / W: 约 100 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>新鲜 鸡蛋 (H:2个, W:1个)</li>
+                                <li>新鲜 菠菜 (或用 预备好的 绿叶菜中部分菠菜) 50g</li>
+                                <li>少量油</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">少油快速炒鸡蛋和菠菜。</p>
+                        </div>
+                    </div>
+                    <!-- Lunch -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-recycle meal-icon"></i>午餐 (剩菜改造)</h4>
+                        <span class="calorie-tag">H: 约 545 大卡 / W: 约 345 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>周一晚餐剩余的 加热好的 鸡肉、烤蔬菜、烤红薯 (份量参照周一晚餐计划)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">直接微波炉或烤箱加热剩菜。</p>
+                        </div>
+                    </div>
+                    <!-- Dinner -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-concierge-bell meal-icon"></i>晚餐 (鸡肉蔬菜炒藜麦)</h4>
+                        <span class="calorie-tag">H: 约 560 大卡 / W: 约 390 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>预备好的 熟藜麦 (H:150g, W:100g)</li>
+                                <li>预备好的 熟鸡胸肉 (切丁 H:100g, W:80g)</li>
+                                <li>预备好的 切块洋葱/彩椒/胡萝卜 (混合 H:200g, W:150g)</li>
+                                <li>预备好的 西兰花小朵 (少量)</li>
+                                <li>新鲜 蒜末 (可选)</li>
+                                <li>低钠酱油, 少量油 (约5ml)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">锅中热少量油，可爆香蒜末/洋葱。加入预备好的硬质蔬菜翻炒几分钟，再加入预备好的熟鸡丁和熟藜麦，快速翻炒加热。淋入少量低钠酱油拌匀即可。</p>
+                        </div>
+                    </div>
+                    <!-- Snack -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-ice-cream meal-icon"></i>加餐 (可选)</h4>
+                        <span class="calorie-tag">H: 约 120 大卡 / W: 约 80 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>H: 无糖希腊酸奶 150g</li>
+                                <li>W: 无糖希腊酸奶 100g</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Daily Total -->
+                    <div class="total-calories">
+                        <p class="font-semibold text-primary-color">全天总计 (估算, 不含加餐):</p>
+                        <p class="text-gray-700">H: 约 1285 大卡 / W: 约 835 大卡</p>
+                        <p class="text-xs text-gray-500 mt-1">*保守估算，实际会略高。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wednesday -->
+            <div class="card day-container">
+                <h2 class="text-2xl font-semibold mb-6 border-b pb-3 border-gray-200 flex items-center">
+                    <i class="far fa-calendar-alt mr-3 text-xl text-primary-color"></i> 星期三 (Wednesday, April 23, 2025)
+                </h2>
+                <div class="space-y-6">
+                    <!-- Breakfast -->
+                    <div class="meal-item">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-coffee meal-icon"></i>早餐</h4>
+                        <span class="calorie-tag">酸奶: H:约210/W:约130 大卡 | 燕麦: H:约220/W:约150 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材 (二选一):</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>无糖希腊酸奶 (H:150g, W:100g) + 坚果 (H:10g, W:5g)</li>
+                                <li>或 燕麦片(干 H:60g, W:40g)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">直接组合酸奶坚果，或快速煮燕麦片。</p>
+                        </div>
+                    </div>
+                    <!-- Lunch -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-recycle meal-icon"></i>午餐 (剩菜改造)</h4>
+                        <span class="calorie-tag">H: 约 560 大卡 / W: 约 390 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>周二晚餐剩余的 鸡肉蔬菜炒藜麦 (份量参照周二晚餐计划)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">微波炉加热即可。</p>
+                        </div>
+                    </div>
+                    <!-- Dinner -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-seedling meal-icon"></i>晚餐 (扁豆/鹰嘴豆沙拉)</h4>
+                        <span class="calorie-tag">H: 约 450 大卡 / W: 约 310 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>罐头 熟扁豆/鹰嘴豆 (冲洗沥干 H:150g, W:100g)</li>
+                                <li>预备好的 洗净混合绿叶菜 (H:200g, W:150g)</li>
+                                <li>预备好的 切块彩椒/胡萝卜 (少量)</li>
+                                <li>预备好的 水煮蛋 1个 (H&W)</li>
+                                <li>预备好的 沙拉酱汁 (含油 H:约10ml, W:约5ml)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">混合所有食材，淋上预备好的沙拉酱汁。</p>
+                        </div>
+                    </div>
+                    <!-- Snack -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-carrot meal-icon"></i>加餐 (可选)</h4>
+                        <span class="calorie-tag">H: 约 40 大卡 / W: 约 30 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>H: 胡萝卜 1根 (约100g)</li>
+                                <li>W: 小胡萝卜 1根 (约70g)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Daily Total -->
+                    <div class="total-calories">
+                        <p class="font-semibold text-primary-color">全天总计 (估算, 酸奶早餐, 不含加餐):</p>
+                        <p class="text-gray-700">H: 约 1220 大卡 / W: 约 830 大卡</p>
+                        <p class="text-xs text-gray-500 mt-1">*若热量偏低，可通过加餐或调整其他天饮食补充。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thursday -->
+            <div class="card day-container">
+                <h2 class="text-2xl font-semibold mb-6 border-b pb-3 border-gray-200 flex items-center">
+                    <i class="far fa-calendar-alt mr-3 text-xl text-primary-color"></i> 星期四 (Thursday, April 24, 2025)
+                </h2>
+                <div class="space-y-6">
+                    <!-- Breakfast -->
+                    <div class="meal-item">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-egg meal-icon"></i>早餐 (炒蛋)</h4>
+                        <span class="calorie-tag">H: 约 190 大卡 / W: 约 105 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>新鲜 鸡蛋 (H:2个, W:1个)</li>
+                                <li>预备好的 切块彩椒 50g</li>
+                                <li>少量油</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">少油快速炒鸡蛋和彩椒。</p>
+                        </div>
+                    </div>
+                    <!-- Lunch -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-recycle meal-icon"></i>午餐 (剩菜改造)</h4>
+                        <span class="calorie-tag">H: 约 450 大卡 / W: 约 310 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>周三晚餐剩余的 豆类沙拉 (份量参照周三晚餐计划)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">直接食用。</p>
+                        </div>
+                    </div>
+                    <!-- Dinner -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-bowling-ball meal-icon"></i>晚餐 (红薯能量碗)</h4>
+                        <span class="calorie-tag">H: 约 395 大卡 / W: 约 270 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>新鲜 红薯 (洗净 H:200g, W:120g)</li>
+                                <li>罐头 熟扁豆/鹰嘴豆 (冲洗沥干 H:100g, W:80g)</li>
+                                <li>预备好的 西兰花小朵 (H:150g, W:100g)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">将红薯烤熟/蒸熟。同时将西兰花蒸熟或水煮。将熟红薯放碗底，铺上加热过的豆子，旁边放西兰花。</p>
+                        </div>
+                    </div>
+                    <!-- Snack -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-cookie-bite meal-icon"></i>加餐 (可选)</h4>
+                        <span class="calorie-tag">H: 约 100 大卡 / W: 约 65 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>H: 坚果 15g</li>
+                                <li>W: 坚果 10g</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Daily Total -->
+                    <div class="total-calories">
+                        <p class="font-semibold text-primary-color">全天总计 (估算, 不含加餐):</p>
+                        <p class="text-gray-700">H: 约 1035 大卡 / W: 约 685 大卡</p>
+                        <p class="text-xs text-gray-500 mt-1">*热量估算偏低，建议增加健康加餐或调整其他天饮食。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friday -->
+            <div class="card day-container">
+                <h2 class="text-2xl font-semibold mb-6 border-b pb-3 border-gray-200 flex items-center">
+                    <i class="far fa-calendar-alt mr-3 text-xl text-primary-color"></i> 星期五 (Friday, April 25, 2025)
+                </h2>
+                <div class="space-y-6">
+                    <!-- Breakfast -->
+                    <div class="meal-item">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-coffee meal-icon"></i>早餐</h4>
+                        <span class="calorie-tag">H: 约 280 大卡 / W: 约 180 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>燕麦片(干 H:60g, W:40g)</li>
+                                <li>原味坚果 (H:10g, W:5g)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">快速煮燕麦片，加坚果。</p>
+                        </div>
+                    </div>
+                    <!-- Lunch -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-recycle meal-icon"></i>午餐 (剩菜改造)</h4>
+                        <span class="calorie-tag">H: 约 395 大卡 / W: 约 270 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>周四晚餐剩余的 红薯能量碗 (份量参照周四晚餐计划)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">微波炉加热。</p>
+                        </div>
+                    </div>
+                    <!-- Dinner -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-trash-alt meal-icon"></i>晚餐 ("清冰箱"沙拉)</h4>
+                        <span class="calorie-tag">H: 约 410 大卡 / W: 约 300 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>剩余 预备好的 熟鸡肉 (H:100g, W:80g)</li>
+                                <li>剩余 预备好的 蔬菜 (H:200g, W:150g)</li>
+                                <li>剩余 预备好的 熟藜麦 (H:100g, W:80g, 可选)</li>
+                                <li>预备好的 沙拉酱汁 (含油 H:约10ml, W:约5ml)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">将所有剩余可用的预备食材组合成一份大沙拉。</p>
+                        </div>
+                    </div>
+                    <!-- Snack -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-lemon meal-icon"></i>加餐 (可选)</h4>
+                        <span class="calorie-tag">H: 约 70 大卡 / W: 约 50 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>H: 橙子 1个 (约150g)</li>
+                                <li>W: 小橙子 1个 (约100g)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Daily Total -->
+                    <div class="total-calories">
+                        <p class="font-semibold text-primary-color">全天总计 (估算, 不含加餐):</p>
+                        <p class="text-gray-700">H: 约 1085 大卡 / W: 约 750 大卡</p>
+                        <p class="text-xs text-gray-500 mt-1">*同样偏低，请注意调整。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saturday -->
+            <div class="card day-container">
+                <h2 class="text-2xl font-semibold mb-6 border-b pb-3 border-gray-200 flex items-center">
+                    <i class="far fa-calendar-alt mr-3 text-xl text-primary-color"></i> 星期六 (Saturday, April 26, 2025)
+                </h2>
+                <div class="space-y-6">
+                    <!-- Breakfast -->
+                    <div class="meal-item">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-coffee meal-icon"></i>早餐</h4>
+                        <span class="calorie-tag">酸奶: H:约210/W:约130 大卡 | 鸡蛋: H:约140/W:约70 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材 (二选一):</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>无糖希腊酸奶 (H:150g, W:100g) + 坚果 (H:10g, W:5g)</li>
+                                <li>或 新鲜 鸡蛋 (H:2个, W:1个)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">直接组合酸奶坚果，或新鲜炒蛋。</p>
+                        </div>
+                    </div>
+                    <!-- Lunch -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-utensils meal-icon"></i>午餐 (鸡蛋蔬菜沙拉)</h4>
+                        <span class="calorie-tag">H: 约 300 大卡 / W: 约 200 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>新鲜 鸡蛋 (H:2个, W:1个)</li>
+                                <li>剩余 预备好的 蔬菜 (H:200g, W:150g)</li>
+                                <li>预备好的 沙拉酱汁 (含油 H:约10ml, W:约5ml)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">水煮蛋或炒蛋，搭配蔬菜和酱汁。</p>
+                        </div>
+                    </div>
+                    <!-- Dinner -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-concierge-bell meal-icon"></i>晚餐 (新鲜烹饪 - 烤鸡胸 + 烤蔬菜)</h4>
+                        <span class="calorie-tag">H: 约 575 大卡 / W: 约 380 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>新鲜 鸡胸肉 (H:180g, W:120g)</li>
+                                <li>剩余或新鲜蔬菜 (混合 H:250g, W:200g)</li>
+                                <li>橄榄油 (H:约10ml, W:约5ml)</li>
+                                <li>新调味料</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">将鸡胸肉和蔬菜用橄榄油、盐、胡椒粉和其他调味料腌制，放入预热200°C的烤箱烤约20-25分钟或至熟透。</p>
+                        </div>
+                    </div>
+                    <!-- Snack -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-apple-alt meal-icon"></i>加餐 (可选)</h4>
+                        <span class="calorie-tag">H: 约 80 大卡 / W: 约 60 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>H: 苹果 1个 (约150g)</li>
+                                <li>W: 小苹果 1个 (约100g)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Daily Total -->
+                    <div class="total-calories">
+                        <p class="font-semibold text-primary-color">全天总计 (估算, 酸奶早餐, 不含加餐):</p>
+                        <p class="text-gray-700">H: 约 1085 大卡 / W: 约 710 大卡</p>
+                        <p class="text-xs text-gray-500 mt-1">*热量偏低，可通过加餐或调整其他天饮食补充。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sunday -->
+            <div class="card day-container">
+                <h2 class="text-2xl font-semibold mb-6 border-b pb-3 border-gray-200 flex items-center">
+                    <i class="far fa-calendar-alt mr-3 text-xl text-primary-color"></i> 星期日 (Sunday, April 27, 2025)
+                </h2>
+                <div class="space-y-6">
+                    <!-- Breakfast -->
+                    <div class="meal-item">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-egg meal-icon"></i>早餐 (水煮蛋+燕麦)</h4>
+                        <span class="calorie-tag">H: 约 350 大卡 / W: 约 230 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>燕麦片(干 H:60g, W:40g)</li>
+                                <li>新鲜 鸡蛋 (H:2个, W:1个)</li>
+                                <li>水/低脂奶</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">快速煮燕麦片，搭配水煮蛋。</p>
+                        </div>
+                    </div>
+                    <!-- Lunch -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-recycle meal-icon"></i>午餐 (剩菜改造)</h4>
+                        <span class="calorie-tag">H: 约 575 大卡 / W: 约 380 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>周六晚餐剩余的 烤鸡胸 + 烤蔬菜 (份量参照周六晚餐计划)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">微波炉或烤箱加热剩菜。</p>
+                        </div>
+                    </div>
+                    <!-- Dinner -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-utensils meal-icon"></i>晚餐 (简易蔬菜鸡肉汤)</h4>
+                        <span class="calorie-tag">H: 约 400 大卡 / W: 约 280 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <p class="font-medium text-gray-700">食材:</p>
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>剩余 预备好的 熟鸡肉 (H:100g, W:80g)</li>
+                                <li>剩余或新鲜 蔬菜 (混合 H:200g, W:150g)</li>
+                                <li>低钠鸡汤底或清水</li>
+                                <li>少量油 (可选)</li>
+                            </ul>
+                            <p class="font-medium text-gray-700 mt-2">做法:</p>
+                            <p class="mt-1 instructions">用少量油炒香蔬菜，加入鸡汤底或清水煮沸，放入鸡肉加热至熟，调味后食用。</p>
+                        </div>
+                    </div>
+                    <!-- Snack -->
+                    <div class="meal-item border-t pt-6 border-gray-100">
+                        <h4 class="text-lg font-medium flex items-center"><i class="fas fa-cookie-bite meal-icon"></i>加餐 (可选)</h4>
+                        <span class="calorie-tag">H: 约 100 大卡 / W: 约 65 大卡</span>
+                        <div class="mt-3 pl-6">
+                            <ul class="list-disc pl-5 mt-1 text-gray-600 ingredient-list">
+                                <li>H: 坚果 15g</li>
+                                <li>W: 坚果 10g</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Daily Total -->
+                    <div class="total-calories">
+                        <p class="font-semibold text-primary-color">全天总计 (估算, 不含加餐):</p>
+                        <p class="text-gray-700">H: 约 1325 大卡 / W: 约 890 大卡</p>
+                        <p class="text-xs text-gray-500 mt-1">*热量偏低，可通过加餐或调整其他天饮食补充。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
