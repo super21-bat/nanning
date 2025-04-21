@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南宁五日自驾游规划 (Final Refinements)</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Leaflet.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <style>
+        :root {
+            /* Vibrant Travel Palette */
+            --primary-color: #0097A7; --secondary-color: #4DD0E1; --accent-color: #FF7043;
+            --accent-light: #FFAB91; --bg-light: #FDFBF5; --bg-white: #FFFFFF;
+            --text-dark: #37474F; --text-light: #78909C; --border-color: #E0E0E0;
+            --shadow-color: rgba(0, 151, 167, 0.15);
+        }
+        body { font-family: 'Poppins', 'Noto Sans SC', sans-serif; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.7; }
+        h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; color: var(--primary-color); font-weight: 600; }
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; text-align: center; font-weight: 700;}
+        h2 { font-size: 1.8rem; margin-bottom: 1.5rem; padding-bottom: 0.6rem; border-bottom: 3px solid var(--secondary-color); font-weight: 600;}
+        h3 { font-size: 1.2rem; color: var(--primary-color); font-weight: 600; margin-bottom: 1rem; margin-top: 1.5rem;}
+        h4 { font-size: 1.0rem; color: var(--primary-color); font-weight: 600; margin-bottom: 0.75rem; } /* Smaller heading for sections */
+        h5 { font-size: 0.9rem; color: var(--text-dark); font-weight: 500; margin-bottom: 0.5rem; } /* Sub-heading for transport */
+        .container-custom { max-width: 950px; margin: 2rem auto; padding: 1rem; }
+        .card { background: linear-gradient(135deg, var(--bg-white) 0%, #F8FDFD 100%); border-radius: 16px; box-shadow: 0 10px 30px var(--shadow-color); padding: 2rem; margin-bottom: 2.5rem; border: 1px solid #E0F7FA; overflow: visible; page-break-inside: avoid; }
+        .icon { margin-right: 0.8rem; color: var(--accent-color); width: 1.3em; text-align: center; vertical-align: middle; }
+        .hero { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: var(--bg-white); padding: 4rem 1.5rem; text-align: center; border-radius: 0 0 30px 30px; margin-bottom: 3rem; box-shadow: 0 10px 25px rgba(0, 151, 167, 0.3); }
+        .hero h1 { color: var(--bg-white); font-size: 3.2rem; font-weight: 700; }
+        .hero p { font-size: 1.2rem; opacity: 0.95; margin-top: 0.5rem; font-weight: 300; }
+
+        /* --- Timeline Style FINAL CORRECTION --- */
+        .timeline {
+            position: relative;
+            /* Allocate space on the left for graphics */
+            padding-left: 2rem; /* Reduced padding slightly */
+            margin-top: 1rem;
+        }
+        .timeline::before { /* The Vertical Line */
+            content: '';
+            position: absolute;
+            /* Position line inside the padding area */
+            left: 1rem; /* e.g., 1rem mark within 2rem padding */
+            top: 0.5rem; bottom: 0.5rem; width: 4px;
+            background-image: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
+            border-radius: 5px;
+            z-index: 0;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+            /* Text should start naturally after the padding area */
+        }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item::before { /* The Dot */
+            content: '';
+            position: absolute;
+            /* Calculate LEFT relative to the item's origin */
+            /* Goal: Center of dot (8px) aligned with the line's position (1rem) */
+            /* Formula: (Line Position) - (Half Dot Width) - (Parent Padding) */
+            left: calc(1rem - 8px - 2rem);
+            /* Effectively: left: -1rem - 8px; */
+            top: 0.5em; /* Align vertically with the first line of text */
+            transform: translateY(-1px); /* Fine-tuning */
+            width: 16px; height: 16px; border-radius: 50%;
+            background-color: var(--accent-light);
+            border: 3px solid var(--accent-color);
+            z-index: 1; /* Dot above the line */
+            box-shadow: 0 0 10px rgba(255, 112, 67, 0.5);
+        }
+        .timeline-item p {
+            position: relative; /* Ensure text respects positioning context */
+            /* No margin needed, text flows naturally after padding */
+        }
+        /* --- End Timeline Style --- */
+
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background-color: var(--primary-color); color: var(--bg-white); padding: 0.8rem 1.2rem; border-radius: 50px; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); z-index: 1000; transition: all 0.3s ease; font-size: 0.9rem; border: none; cursor: pointer; }
+        .print-btn:hover { background-color: var(--accent-color); transform: scale(1.05); }
+
+        .detail-item { display: flex; align-items: center; margin-bottom: 1.5rem; padding: 1rem 0; border-bottom: 1px dashed var(--border-color); page-break-inside: avoid; }
+        .detail-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .detail-item .time-icon { flex: 0 0 60px; text-align: center; margin-right: 1.5rem; }
+        .detail-item .time-icon strong { display: block; font-size: 0.85rem; font-weight: 700; color: var(--primary-color); letter-spacing: 0.5px; }
+        .detail-item .time-icon i { font-size: 1.8rem; color: var(--accent-color); margin-top: 0.4rem; display: block; }
+        .detail-item .content { flex-grow: 1; }
+        .detail-item .content p { margin-bottom: 0.3rem; font-size: 1rem; color: var(--text-dark); }
+        .detail-item .content .location, .detail-item .content .nav-link { font-size: 0.9rem; color: var(--text-light); display: inline-block; }
+        .detail-item .content .description { font-size: 0.9rem; color: var(--text-light); margin-top: 0.3rem; }
+        .detail-item .content .recommendation { font-size: 0.9rem; color: var(--primary-color); background-color: #E0F7FA; padding: 0.6rem 1rem; border-radius: 8px; margin-top: 0.6rem; border-left: 4px solid var(--secondary-color); }
+        .detail-item .content .recommendation i { color: var(--accent-color); margin-right: 0.4rem; }
+
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        /* Custom list style for transport info */
+        .transport-list { list-style: none; padding-left: 0; margin-top: 0.5rem; }
+        .transport-list li { margin-bottom: 0.4rem; font-size: 0.9rem; color: var(--text-dark); position: relative; padding-left: 1.2rem; }
+        .transport-list li::before {
+            content: '\f071'; /* Font Awesome Warning or Info sign */
+            font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; left: 0; top: 0.1em;
+            color: var(--secondary-color); font-size: 0.8em;
+        }
+        .transport-list li strong { font-weight: 500; color: var(--text-dark); } /* Highlight key info */
+
+        ul.list-disc { padding-left: 1.5rem; list-style-type: none; }
+        ul.list-disc li { margin-bottom: 0.5rem; position: relative; padding-left: 1.2rem; }
+        ul.list-disc li::before { content: ''; position: absolute; left: 0; top: 0.5em; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; background-color: var(--accent-color); }
+        .nav-link { color: var(--primary-color); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; cursor: pointer; transition: color 0.3s ease; }
+        .nav-link:hover { color: var(--accent-color); }
+
+        /* Map Styles */
+        #map { height: 400px; border-radius: 16px; border: 1px solid var(--border-color); margin-top: 2rem; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); }
+
+        /* Mermaid Styles */
+        .mermaid-container { text-align: center; margin-top: 1rem; overflow: hidden; border: 1px solid var(--border-color); border-radius: 8px; height: 350px; position: relative; cursor: grab; }
+        .mermaid-container:active { cursor: grabbing; }
+        .mermaid-container svg { display: block; width: 100%; height: 100%; max-width: none !important; max-height: none !important; }
+        .svg-pan-zoom-control-element { fill: var(--primary-color); stroke: var(--bg-white); stroke-width: 1.5px; opacity: 0.7; }
+        .svg-pan-zoom-control-element:hover { opacity: 1; }
+
+        /* Print Styles */
+        @media print {
+             :root { --primary-color: #000000; --secondary-color: #555555; --accent-color: #333333; --text-dark: #000000; --text-light: #444444; --bg-light: #FFFFFF; --bg-white: #FFFFFF; --border-color: #CCCCCC; }
+            body { background-color: #fff; color: #000; font-size: 10pt; font-family: 'Noto Sans SC', sans-serif; }
+            .container-custom { max-width: 100%; padding: 0; margin: 0; }
+            .hero, .print-btn, .svg-pan-zoom-controls { display: none; }
+            .card { box-shadow: none; border: 1px solid #ccc; padding: 0.5rem; margin-bottom: 0.5rem; page-break-inside: avoid; background: none; overflow: hidden; }
+            h1, h2, h3, h4, h5 { color: #000; font-family: 'Noto Sans SC', sans-serif; border: none; }
+            h1 { font-size: 16pt; text-align: left;} h2 { font-size: 13pt; border-bottom: 1px solid #ccc; } h3 { font-size: 11pt; } h4 { font-size: 10pt; } h5 { font-size: 9pt; }
+            .section, .day-section { page-break-after: always; margin-bottom: 0; }
+            .section:last-child, .day-section:last-child { page-break-after: auto; }
+            .detail-item { border-left: 2px solid #bbb; padding: 0.5rem; margin-bottom: 0.5rem; border-bottom: 1px dashed #ccc; }
+            .detail-item .time-icon i { color: #555; font-size: 1.2rem; }
+            .detail-item .content .recommendation { background-color: #f0f0f0; border: 1px solid #eee; color: #000; border-left: 2px solid #aaa; }
+            .timeline { padding-left: 0; } .timeline::before, .timeline-item::before { display: none; } .timeline-item p { margin-left: 0; }
+            a, .nav-link { text-decoration: none; color: #000; }
+            .info-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+            .transport-list { padding-left: 0; } .transport-list li::before { color: #555; }
+            #map { height: 200px; border: 1px solid #ccc; }
+            ul.list-disc li::before { background-color: #555; }
+            .mermaid-container { text-align: left; overflow: hidden; height: auto; border: none; }
+            .mermaid-container svg { max-width: 100%; height: auto; }
+        }
+        @page { size: A4; margin: 15mm; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Print Button -->
+    <button class="print-btn" onclick="window.print()">
+        <i class="fas fa-print icon" style="color: white; margin-right: 5px;"></i> 打印行程
+    </button>
+
+    <!-- Hero Module -->
+    <div class="hero">
+        <h1>南宁五日自驾游</h1>
+        <p>探索广西之美 | 2025年5月1日 - 5月5日</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container-custom">
+        <!-- Page 1: Overviews, Map, Visualization -->
+        <div class="section">
+             <div class="card">
+                <h2><i class="fas fa-info-circle icon"></i>行程概览</h2>
+                 <div class="info-grid mt-6">
+                    <div>
+                        <h4><i class="fas fa-users icon"></i>团队信息</h4>
+                        <ul class="list-disc pl-1 text-gray-700 text-sm space-y-1">
+                            <li>胡青：3人（2大1小）</li> <li>湖畔：2人</li> <li>总人数：5人</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h4><i class="fas fa-map-marker-alt icon"></i>主要目的地</h4>
+                        <ul class="list-disc pl-1 text-gray-700 text-sm space-y-1">
+                             <li>南宁：<span class="nav-link" onclick="navigateToLocation('青秀山风景区', '108.38,22.80')">青秀山</span></li>
+                            <li>防城港：<span class="nav-link" onclick="navigateToLocation('西湾旅游区', '108.355,21.645')">西湾</span>, <span class="nav-link" onclick="navigateToLocation('白浪滩', '108.35,21.65')">白浪滩</span></li>
+                            <li>崇左：<span class="nav-link" onclick="navigateToLocation('德天跨国瀑布景区', '106.718,22.855')">德天瀑布</span>, <span class="nav-link" onclick="navigateToLocation('明仕田园景区', '106.908,22.956')">明仕田园</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-span-full md:col-span-1"> <!-- Span full width on small screens -->
+                        <h4><i class="fas fa-train icon"></i>交通与租车</h4>
+                         <div class="mt-4 space-y-4">
+                            <div>
+                                <h5><i class="fas fa-user-friends icon" style="color: var(--primary-color); margin-right: 0.5rem;"></i>胡青 (3人)</h5>
+                                <ul class="transport-list">
+                                    <li><strong>抵达:</strong> 5月1日 <strong>11:06</strong>, G3569, <span class="nav-link" onclick="navigateToLocation('南宁东站', '108.4138,22.8418')">南宁东站</span></li>
+                                    <li><strong>离开:</strong> 5月5日 <strong>09:00</strong>, G3576, <span class="nav-link" onclick="navigateToLocation('南宁北站', '108.31,22.86')">南宁北站</span></li>
+                                </ul>
+                            </div>
+                             <div>
+                                <h5><i class="fas fa-user-friends icon" style="color: var(--primary-color); margin-right: 0.5rem;"></i>湖畔 (2人)</h5>
+                                <ul class="transport-list">
+                                     <li><strong>抵达:</strong> 5月1日 <strong>10:38</strong>, G2956, <span class="nav-link" onclick="navigateToLocation('南宁东站', '108.4138,22.8418')">南宁东站</span></li>
+                                    <li><strong>离开:</strong> 5月5日 <strong>11:18</strong>, G417, <span class="nav-link" onclick="navigateToLocation('南宁东站', '108.4138,22.8418')">南宁东站</span></li>
+                                </ul>
+                            </div>
+                            <div class="pt-2 border-t border-dashed border-gray-200">
+                                <h5><i class="fas fa-car icon" style="color: var(--primary-color); margin-right: 0.5rem;"></i>租车信息 (共享)</h5>
+                                <ul class="transport-list">
+                                     <li><strong>地点:</strong> <span class="nav-link" onclick="navigateToLocation('南宁东站北广场地下停车场负二层A2区', '108.4138,22.8418')">南宁东站北广场地下停车场-负二层A2区</span></li>
+                                     <li><strong>取车:</strong> 5月1日 <strong>11:00</strong> (湖畔负责)</li>
+                                     <li><strong>还车:</strong> 5月5日 <strong>约09:30</strong> (湖畔负责)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+
+             <div class="card">
+                <h2><i class="fas fa-bed icon"></i>住宿信息</h2>
+                 <ul class="list-disc pl-6 text-gray-700 text-sm space-y-3 mt-6">
+                     <li><strong>第1晚 (5/1):</strong> 防城港 - <span class="nav-link" onclick="navigateToLocation('防城港港口阳光海岸3期5栋', '108.3555,21.6452')">港口阳光海岸3期5栋</span></li>
+                     <li><strong>第2-3晚 (5/2-3):</strong> 崇左 - <span class="nav-link" onclick="navigateToLocation('崇左江州幸福家园小区9栋2单元', '107.3838,22.3846')">江州幸福家园小区9栋2单元</span></li>
+                      <li><strong>第4晚 (5/4):</strong> 南宁 - <span class="nav-link" onclick="navigateToLocation('南宁东站万象城东盟国际18', '108.3920,22.8130')">东站万象城东盟国际18</span></li>
+                 </ul>
+            </div>
+
+             <div class="card">
+                 <h2><i class="fas fa-route icon"></i>自驾路线</h2>
+                 <div class="timeline mt-6"> {/* Applied corrected timeline style */}
+                     <div class="timeline-item"> <p class="font-semibold text-base">南宁东站 → 防城港住宿</p> <p class="text-sm text-gray-600">约147km | 约1h45m | G75 → S7512</p> </div>
+                     <div class="timeline-item"> <p class="font-semibold text-base">防城港 → 崇左住宿</p> <p class="text-sm text-gray-600">约167km | 约2h | S85 → S60</p> </div>
+                     <div class="timeline-item"> <p class="font-semibold text-base">崇左 → 南宁住宿</p> <p class="text-sm text-gray-600">约131km | 约1h50m | G7211</p> </div>
+                     <div class="timeline-item"> <p class="font-semibold text-base">总里程</p> <p class="text-sm text-gray-600">约445km (主要城际)</p> </div>
+                 </div>
+             </div>
+
+             <div class="card">
+                <h2><i class="fas fa-project-diagram icon"></i>行程核心节点流程 <span class="text-sm text-gray-500 font-normal">(可缩放/拖动)</span></h2>
+                <div id="mermaid-flowchart-container" class="mermaid-container">
+                    <div class="mermaid-definition" style="display: none;">
+graph LR
+    %% Define Styles
+    classDef day fill:#0097A7,stroke:#00796B,stroke-width:2px,color:#fff,font-weight:bold,rx:10px,ry:10px;
+    classDef location fill:#E0F7FA,stroke:#4DD0E1,stroke-width:1px,color:#37474F;
+    classDef activity fill:#FFAB91,stroke:#FF7043,stroke-width:1px,color:#37474F,rx:15px,ry:15px;
+    classDef transition color:#78909C,font-style:italic;
+    classDef final fill:#FF7043,stroke:#E64A19,stroke-width:2px,color:#fff,font-weight:bold;
+
+    %% Nodes and Flow - FIXED NODE TEXT
+    D1(Day 1):::day --> NN_Start[南宁 抵达/取车];
+    NN_Start -- 驾车 --> FCG[防城港 住宿点];
+    FCG -- 主要活动 --> FCG_Act(西湾/海滩);
+    FCG_Act --> D2(Day 2):::day;
+
+    D2 -- 驾车 --> CZ[崇左 住宿点];
+    CZ -- 主要活动 --> CZ_Act1(德天瀑布);
+    CZ_Act1 --> D3(Day 3):::day;
+
+    D3 -- 主要活动 --> CZ_Act2(明仕田园);
+    CZ_Act2 -- 驾车 --> NN_Stay[南宁 住宿点];
+    NN_Stay --> D4(Day 4):::day;
+
+    D4 -- 主要活动 --> NN_Act(青秀山);
+    NN_Act --> D5(Day 5):::day;
+
+    D5 -- 分头出发 --> Dep1[胡青: 南宁北站];
+    D5 -- 分头出发 --> Dep2[湖畔: 还车/南宁东站];
+
+    %% Assign Classes
+    class D1,D2,D3,D4,D5 day;
+    class NN_Start,FCG,CZ,NN_Stay location;
+    class FCG_Act,CZ_Act1,CZ_Act2,NN_Act activity;
+    class Dep1,Dep2 final;
+                    </div>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-4">行程主要地点与活动流程示意图</p>
+            </div>
+
+
+            <div class="card">
+                <h2><i class="fas fa-map icon"></i>行程地图概览</h2>
+                <div id="map"></div>
+            </div>
+        </div>
+        <div class="page-break"></div>
+
+        <!-- Day 1 Section -->
+        <div class="day-section"> <div class="card"> <h2><i class="fas fa-calendar-alt icon"></i>第1天：抵达南宁，向海出发 (5月1日)</h2> <div class="mt-6"> <div class="detail-item"> <div class="time-icon"><strong>10:38</strong><i class="fas fa-train-subway"></i></div> <div class="content"> <p><strong>湖畔抵达</strong> <span class="nav-link" onclick="navigateToLocation('南宁东站', '108.4138,22.8418')">南宁东站</span> (G2956)</p> <p class="description">取行李，准备联系租车。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>11:00</strong><i class="fas fa-key"></i></div> <div class="content"> <p><strong>办理租车 (湖畔)</strong></p> <p class="location"><span class="nav-link" onclick="navigateToLocation('南宁东站北广场地下停车场负二层A2区', '108.4138,22.8418')">南宁东站租车点</span></p> <p class="description">建议SUV/MPV。检查车辆。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>11:06</strong><i class="fas fa-train-subway"></i></div> <div class="content"> <p><strong>胡青抵达</strong> <span class="nav-link" onclick="navigateToLocation('南宁东站', '108.4138,22.8418')">南宁东站</span> (G3569)</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>11:30</strong><i class="fas fa-users"></i></div> <div class="content"> <p><strong>全员汇合，装载行李</strong></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>12:00</strong><i class="fas fa-car-side"></i></div> <div class="content"> <p><strong>出发前往防城港</strong></p> <p class="description">约1h45m车程。</p> <p class="location">导航至: <span class="nav-link" onclick="navigateToLocation('防城港港口阳光海岸3期5栋', '108.3555,21.6452')">防城港住宿点</span></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>13:45</strong><i class="fas fa-bed"></i></div> <div class="content"> <p><strong>抵达防城港，办理入住</strong></p> <p class="location"><span class="nav-link" onclick="navigateToLocation('防城港港口阳光海岸3期5栋', '108.3555,21.6452')">港口阳光海岸3期5栋</span></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>14:30</strong><i class="fas fa-utensils"></i></div> <div class="content"> <p><strong>午餐</strong> (住宿附近)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('渔舍一九七三(金海湾小区店)', '108.351,21.642')">渔舍一九七三(金海湾店)</span>。海鲜, ¥60-80/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>15:30</strong><i class="fas fa-umbrella-beach"></i></div> <div class="content"> <p><strong>游览</strong> <span class="nav-link" onclick="navigateToLocation('西湾旅游区', '108.355,21.645')">西湾旅游区</span></p> <p class="description">免费。海景, 沙滩漫步，拍照。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>18:00</strong><i class="fas fa-utensils"></i></div> <div class="content"> <p><strong>晚餐</strong> (西湾附近)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('风情岛海鲜餐厅(星光里店)', '108.353,21.643')">风情岛海鲜餐厅(星光里店)</span>。海鲜, ¥50-70/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>19:30</strong><i class="fas fa-moon"></i></div> <div class="content"> <p><strong>自由活动/休息</strong></p> <p class="description">欣赏西湾夜景或返回休息。</p> </div> </div> </div> </div> </div>
+         <div class="page-break"></div>
+
+        <!-- Day 2 Section -->
+        <div class="day-section"> <div class="card"> <h2><i class="fas fa-calendar-alt icon"></i>第2天：逐浪白滩，奔赴边城 (5月2日)</h2> <div class="mt-6"> <div class="detail-item"> <div class="time-icon"><strong>07:30</strong><i class="fas fa-mug-saucer"></i></div> <div class="content"> <p><strong>早餐</strong> (住宿附近)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('刘叔小炒菜(金海湾小区C3店)', '108.350,21.641')">刘叔小炒菜(金海湾C3店)</span>。本地早餐, ¥15-25/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>08:30</strong><i class="fas fa-suitcase-rolling"></i></div> <div class="content"> <p><strong>整理行李，办理退房</strong></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>09:00</strong><i class="fas fa-water"></i></div> <div class="content"> <p><strong>游览</strong> <span class="nav-link" onclick="navigateToLocation('白浪滩', '108.35,21.65')">白浪滩</span></p> <p class="description">约3.5小时。免费。宽阔沙滩, 亲子活动。注意潮汐。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>12:30</strong><i class="fas fa-utensils"></i></div> <div class="content"> <p><strong>午餐</strong> (白浪滩附近)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('风情岛海鲜餐厅港口店', '108.345,21.635')">风情岛海鲜餐厅港口店</span>。海鲜, ¥40-60/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>13:30</strong><i class="fas fa-car-side"></i></div> <div class="content"> <p><strong>自驾前往崇左</strong></p> <p class="description">约2小时车程。</p> <p class="location">导航至: <span class="nav-link" onclick="navigateToLocation('崇左江州幸福家园小区9栋2单元', '107.3838,22.3846')">崇左住宿点</span></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>15:30</strong><i class="fas fa-bed"></i></div> <div class="content"> <p><strong>抵达崇左，办理入住</strong></p> <p class="location"><span class="nav-link" onclick="navigateToLocation('崇左江州幸福家园小区9栋2单元', '107.3838,22.3846')">江州幸福家园小区9栋2单元</span></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>17:30</strong><i class="fas fa-utensils"></i></div> <div class="content"> <p><strong>晚餐</strong> (崇左市区)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('康弘羊汤锅(阳光名邸店)', '107.370,22.380')">康弘羊汤锅(阳光名邸店)</span>。特色羊肉, ¥40-60/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>19:00</strong><i class="fas fa-moon"></i></div> <div class="content"> <p><strong>自由活动/休息</strong></p> <p class="description">感受边城夜生活或早点休息。</p> </div> </div> </div> </div> </div>
+        <div class="page-break"></div>
+
+        <!-- Day 3 Section -->
+        <div class="day-section"> <div class="card"> <h2><i class="fas fa-calendar-alt icon"></i>第3天：跨国奇景，田园牧歌 (5月3日)</h2> <div class="mt-6"> <div class="detail-item"> <div class="time-icon"><strong>07:00</strong><i class="fas fa-mug-saucer"></i></div> <div class="content"> <p><strong>早餐</strong> (住宿附近)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('日日是小满(崇左店)', '107.365,22.400')">日日是小满(崇左店)</span>。简餐, ¥10-20/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>07:30</strong><i class="fas fa-car-side"></i></div> <div class="content"> <p><strong>出发前往德天瀑布</strong></p> <p class="description">约1.5小时车程。早出发避高峰。</p> <p class="location">导航至: <span class="nav-link" onclick="navigateToLocation('德天跨国瀑布景区', '106.718,22.855')">德天跨国瀑布景区</span></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>09:00</strong><i class="fas fa-waterfall"></i></div> <div class="content"> <p><strong>游览德天跨国瀑布</strong></p> <p class="description">约3.5小时。门票¥80(含车)。亚洲第一跨国瀑布。可乘竹筏近观。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>12:30</strong><i class="fas fa-utensils"></i></div> <div class="content"> <p><strong>午餐</strong> (德天瀑布附近)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('三餐四季·东南亚创意餐厅', '106.720,22.858')">三餐四季·东南亚创意餐厅</span>。农家菜, ¥30-50/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>13:30</strong><i class="fas fa-car-side"></i></div> <div class="content"> <p><strong>前往明仕田园</strong></p> <p class="description">约1小时车程。</p> <p class="location">导航至: <span class="nav-link" onclick="navigateToLocation('明仕田园景区', '106.908,22.956')">明仕田园景区</span></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>14:30</strong><i class="fas fa-seedling"></i></div> <div class="content"> <p><strong>游览明仕田园</strong></p> <p class="description">约3小时。门票¥100(含竹筏)。“小桂林”风光，乘竹筏漂流。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>17:30</strong><i class="fas fa-car-side"></i></div> <div class="content"> <p><strong>返回崇左住宿</strong></p> <p class="description">约1小时20分钟车程。</p> <p class="location">导航至: <span class="nav-link" onclick="navigateToLocation('崇左江州幸福家园小区9栋2单元', '107.3838,22.3846')">崇左住宿点</span></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>19:00</strong><i class="fas fa-utensils"></i></div> <div class="content"> <p><strong>晚餐</strong> (崇左市区)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('一品螺鲜(东源名城店)', '107.375,22.390')">一品螺鲜(东源名城店)</span>。螺蛳粉/小吃, ¥50-80/人。</p> </div> </div> </div> </div> </div>
+        <div class="page-break"></div>
+
+        <!-- Day 4 Section -->
+        <div class="day-section"> <div class="card"> <h2><i class="fas fa-calendar-alt icon"></i>第4天：回归南宁，都市绿意 (5月4日)</h2> <div class="mt-6"> <div class="detail-item"> <div class="time-icon"><strong>07:30</strong><i class="fas fa-mug-saucer"></i></div> <div class="content"> <p><strong>早餐</strong> (住宿附近)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('广雅云吞(崇左店)', '107.375,22.390')">广雅云吞(崇左店)</span>。广式早点, ¥10-20/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>08:30</strong><i class="fas fa-suitcase-rolling"></i></div> <div class="content"> <p><strong>整理行李，办理退房</strong></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>09:00</strong><i class="fas fa-car-side"></i></div> <div class="content"> <p><strong>自驾返回南宁</strong></p> <p class="description">约1小时50分钟车程。</p> <p class="location">导航至: <span class="nav-link" onclick="navigateToLocation('南宁东站万象城东盟国际18', '108.3920,22.8130')">南宁住宿点</span></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>11:00</strong><i class="fas fa-bed"></i></div> <div class="content"> <p><strong>抵达南宁，办理入住</strong></p> <p class="location"><span class="nav-link" onclick="navigateToLocation('南宁东站万象城东盟国际18', '108.3920,22.8130')">东站万象城东盟国际18</span></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>12:00</strong><i class="fas fa-utensils"></i></div> <div class="content"> <p><strong>午餐</strong> (南宁市区)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('桂小厨广西菜(水晶城店)', '108.360,22.815')">桂小厨广西菜(水晶城店)</span>。广西菜, ¥50-80/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>13:30</strong><i class="fas fa-mountain-sun"></i></div> <div class="content"> <p><strong>游览</strong> <span class="nav-link" onclick="navigateToLocation('青秀山风景区', '108.38,22.80')">青秀山风景区</span></p> <p class="description">约3小时。门票¥20。南宁“绿肺”，登高望远。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>17:00</strong><i class="fas fa-utensils"></i></div> <div class="content"> <p><strong>晚餐</strong> (南宁市区)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('诚如金·南宁本地菜(金源CBD店)', '108.365,22.818')">诚如金·南宁本地菜(金源CBD店)</span>。本地菜, ¥60-90/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>19:00</strong><i class="fas fa-moon"></i></div> <div class="content"> <p><strong>自由活动/休息</strong></p> <p class="description">可逛万象城或南湖公园。</p> </div> </div> </div> </div> </div>
+        <div class="page-break"></div>
+
+        <!-- Day 5 Section -->
+        <div class="day-section"> <div class="card"> <h2><i class="fas fa-calendar-alt icon"></i>第5天：悠闲早餐，温馨返程 (5月5日)</h2> <div class="mt-6"> <div class="detail-item"> <div class="time-icon"><strong>07:00</strong><i class="fas fa-mug-saucer"></i></div> <div class="content"> <p><strong>早餐</strong> (住宿附近)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('东铁餐厅', '108.405,22.840')">东铁餐厅</span>。近南宁东站, ¥10-20/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>07:30</strong><i class="fas fa-suitcase-rolling"></i></div> <div class="content"> <p><strong>整理行李，准备出发</strong></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>08:00</strong><i class="fas fa-car-side"></i></div> <div class="content"> <p><strong>出发前往南宁北站 (送胡青)</strong></p> <p class="description">约30分钟车程。</p> <p class="location">导航至: <span class="nav-link" onclick="navigateToLocation('南宁北站', '108.31,22.86')">南宁北站</span></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>09:00</strong><i class="fas fa-train"></i></div> <div class="content"> <p><strong>胡青返程</strong> (G3576)</p> <p class="location">南宁北站</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>09:15</strong><i class="fas fa-car-side"></i></div> <div class="content"> <p><strong>湖畔前往南宁东站还车</strong></p> <p class="location">导航至: <span class="nav-link" onclick="navigateToLocation('南宁东站北广场地下停车场负二层A2区', '108.4138,22.8418')">南宁东站租车点</span></p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>09:30</strong><i class="fas fa-key"></i></div> <div class="content"> <p><strong>办理还车</strong></p> <p class="location">租车点</p> <p class="description">约30分钟。交接，检查，确认费用。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>10:00</strong><i class="fas fa-utensils"></i></div> <div class="content"> <p><strong>午餐 (湖畔)</strong> (南宁东站附近)</p> <p class="recommendation"><i class="fas fa-star"></i>推荐: <span class="nav-link" onclick="navigateToLocation('桂大山油茶餐厅', '108.408,22.825')">桂大山油茶餐厅</span>。简餐, ¥15-30/人。</p> </div> </div> <div class="detail-item"> <div class="time-icon"><strong>11:18</strong><i class="fas fa-train"></i></div> <div class="content"> <p><strong>湖畔返程</strong> (G417)</p> <p class="location">南宁东站</p> <p class="description">行程圆满结束！</p> </div> </div> </div> </div> </div>
+        <!-- End of Content -->
+
+    </div> <!-- End container-custom -->
+
+    <!-- Leaflet.js Script -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Mermaid.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js"></script>
+    <!-- svg-pan-zoom Script -->
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Mermaid
+            mermaid.initialize({ startOnLoad: false }); // Don't start automatically
+
+            // --- Explicitly Render Mermaid and Add Zoom ---
+            const mermaidContainer = document.getElementById('mermaid-flowchart-container');
+            const mermaidDefinitionElement = mermaidContainer.querySelector('.mermaid-definition');
+            const mermaidGraphDefinition = mermaidDefinitionElement.textContent || mermaidDefinitionElement.innerText;
+            const graphId = 'mermaid-graph-' + Date.now();
+
+             mermaid.render(graphId, mermaidGraphDefinition, (svgCode) => {
+                 mermaidContainer.innerHTML = svgCode; // Insert the rendered SVG
+                 const svgElement = document.getElementById(graphId);
+
+                 if (svgElement) {
+                     svgPanZoom(svgElement, { panEnabled: true, zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true, minZoom: 0.5, maxZoom: 5, zoomScaleSensitivity: 0.3 });
+                     window.addEventListener('resize', () => { const panZoomInstance = svgPanZoom(svgElement); if(panZoomInstance) { panZoomInstance.resize(); panZoomInstance.fit(); panZoomInstance.center(); } });
+                 } else { console.error("Mermaid SVG element not found for ID:", graphId); }
+            });
+            // --- End Mermaid Zoom Section ---
+
+            // Initialize Leaflet Map
+            var map = L.map('map').setView([22.4, 107.8], 8);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', maxZoom: 18, }).addTo(map);
+
+            // Map Locations Data
+            var locations = [ { name: "南宁东站", coords: [22.8418, 108.4138] }, { name: "南宁北站", coords: [22.86, 108.31] }, { name: "防城港住宿", coords: [21.6452, 108.3555] }, { name: "崇左住宿", coords: [22.3846, 107.3838] }, { name: "南宁住宿(万象)", coords: [22.8130, 108.3920] }, { name: "西湾旅游区", coords: [21.645, 108.355] }, { name: "白浪滩", coords: [21.65, 108.35] }, { name: "德天瀑布", coords: [22.855, 106.718] }, { name: "明仕田园", coords: [22.956, 106.908] }, { name: "青秀山", coords: [22.80, 108.38] } ];
+
+            // Add Markers with Permanent Tooltips
+            locations.forEach(function(location) { L.marker(location.coords).addTo(map).bindTooltip(location.name, { permanent: true, direction: 'top', offset: L.point(0, -10), className: 'map-tooltip' }); });
+
+            // Custom CSS for Tooltips
+            var style = document.createElement('style');
+            style.innerHTML = `.map-tooltip { background-color: rgba(255, 255, 255, 0.9); border: 1px solid var(--primary-color); color: var(--text-dark); border-radius: 4px; padding: 3px 8px; font-size: 9pt; font-weight: 500; white-space: nowrap; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }`;
+            document.head.appendChild(style);
+
+        }); // End DOMContentLoaded
+
+        // Navigation Function
+        function navigateToLocation(name, coordsString) {
+            var coords = coordsString.split(','); var lon = parseFloat(coords[0].trim()); var lat = parseFloat(coords[1].trim());
+            if (isNaN(lon) || isNaN(lat)) { console.error("Invalid coords:", name, coordsString); return; }
+            var encodedName = encodeURIComponent(name); var amapUrl = '';
+            var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (isMobile) { amapUrl = isIOS ? `iosamap://navi?sourceApplication=travelPlan&poiname=${encodedName}&lat=${lat}&lon=${lon}&dev=0&style=2` : `androidamap://navi?sourceApplication=travelPlan&poiname=${encodedName}&lat=${lat}&lon=${lon}&dev=0&style=2`; window.location.href = amapUrl; setTimeout(function() { if (!document.hidden) { window.open(`https://www.amap.com/dir?to=${lon},${lat}(${encodedName})&policy=2`, '_blank'); } }, 1000); } else { amapUrl = `https://www.amap.com/dir?to=${lon},${lat}(${encodedName})&policy=2`; window.open(amapUrl, '_blank'); }
+            console.log("Navigate:", name, "Coords:", lat, lon, "URL:", amapUrl);
+        }
+    </script>
+</body>
+</html>
