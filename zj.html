@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南宁五日自驾游规划</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- Google Fonts (Optional - for a different feel) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4A90E2; /* Softer Blue */
+            --secondary-color: #50E3C2; /* Teal */
+            --accent-color: #F5A623; /* Orange */
+            --text-dark: #4A4A4A;
+            --text-light: #9B9B9B;
+            --bg-light: #F9F9F9;
+            --bg-white: #FFFFFF;
+            --border-color: #EAEAEA;
+        }
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'LXGW WenKai TC', sans-serif; /* More artistic font for headers */
+            color: var(--primary-color);
+            font-weight: 500; /* WenKai doesn't have typical weights */
+        }
+        h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.6rem; margin-bottom: 1rem; border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.3rem; color: var(--secondary-color); margin-bottom: 0.8rem; }
+        .container-custom {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .card {
+            background-color: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .icon {
+            margin-right: 0.6rem;
+            color: var(--accent-color);
+            width: 1.2em; /* Ensure consistent icon sizing */
+            text-align: center;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--bg-white);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .hero h1 {
+            color: var(--bg-white);
+            font-size: 2.8rem;
+            font-weight: 700; /* Use Noto Sans for more weight */
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0.5rem;
+            bottom: 0.5rem;
+            width: 3px;
+            background-color: var(--secondary-color);
+            border-radius: 3px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem; /* Adjust to align with the line */
+            top: 0.35rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: var(--bg-white);
+            border: 3px solid var(--accent-color);
+            z-index: 1;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: var(--bg-white);
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .print-btn:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        .detail-item .time-icon {
+            flex-shrink: 0;
+            width: 3.5rem;
+            text-align: center;
+            margin-right: 1rem;
+        }
+        .detail-item .time-icon strong {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .detail-item .time-icon i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-top: 0.3rem;
+        }
+        .detail-item .content p {
+            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
+        }
+        .detail-item .content .location {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .detail-item .content .recommendation {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background-color: #eef7ff;
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        ul.list-disc {
+            padding-left: 1.5rem;
+        }
+        ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: var(--white);
+                color: #000;
+                font-size: 10pt;
+            }
+            .container-custom {
+                max-width: 100%;
+                padding: 0;
+            }
+            .hero, .print-btn {
+                display: none;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                padding: 1rem;
+                margin-bottom: 1rem;
+                page-break-inside: avoid;
+            }
+            h1, h2, h3, h4 {
+                color: #000;
+                font-family: 'Noto Sans SC', sans-serif; /* Use standard font for print */
+            }
+            h1 { font-size: 16pt; }
+            h2 { font-size: 14pt; border-bottom: 1px solid #ccc; }
+            h3 { font-size: 12pt; color: #333; }
+            .section, .day-section {
+                page-break-after: always;
+                margin-bottom: 0;
+            }
+            .detail-item {
+                 border-left: 3px solid #999;
+                 background-color: #fdfdfd;
+                 padding: 0.5rem;
+            }
+            .detail-item .time-icon i { color: #555; }
+            .detail-item .content .recommendation { background-color: #f0f0f0; }
+            .timeline::before { background-color: #ccc; }
+            .timeline-item::before { border-color: #999; background-color: #fff; }
+            a { text-decoration: none; color: #000; }
+            .info-grid { grid-template-columns: 1fr; gap: 0.5rem;} /* Stack grid items for print */
+        }
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- 打印按钮 -->
+    <button class="print-btn" onclick="window.print()">
+        <i class="fas fa-print icon"></i> 打印行程
+    </button>
+
+    <!-- Hero 模块 -->
+    <div class="hero">
+        <h1>南宁五日自驾游</h1>
+        <p>2025年5月1日 - 5月5日 | 畅游绿城，探秘边关</p>
+    </div>
+
+    <!-- 主内容 -->
+    <div class="container-custom">
+        <!-- 第一页：行程概览 + 自驾路线总览 -->
+        <div class="section">
+            <div class="card">
+                <h2><i class="fas fa-map-marked-alt icon"></i>行程概览</h2>
+                <div class="info-grid mt-4">
+                    <div>
+                        <h3 class="font-bold"><i class="fas fa-users icon"></i>团队信息</h3>
+                        <ul class="list-disc pl-1 text-gray-700 text-sm space-y-1">
+                            <li>胡青：3人（2大人，1小孩）</li>
+                            <li>湖畔：2人</li>
+                            <li>总人数：5人（4大人，1小孩），两队汇合后一起出行</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold"><i class="fas fa-landmark icon"></i>主要目的地</h3>
+                        <ul class="list-disc pl-1 text-gray-700 text-sm space-y-1">
+                            <li>南宁：青秀山</li>
+                            <li>防城港：西湾、白浪滩</li>
+                            <li>崇左：德天瀑布、明仕田园</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold"><i class="fas fa-car-side icon"></i>交通与租车</h3>
+                        <ul class="list-disc pl-1 text-gray-700 text-sm space-y-1">
+                            <li>胡青：5/1 G3569 (11:06抵南宁东) | 5/5 G3576 (9:00离南宁北)</li>
+                            <li>湖畔：5/1 G2956 (10:38抵南宁东) | 5/5 G417 (11:18离南宁东)</li>
+                            <li>租车点：南宁东站北广场地下停车场负二层A2区</li>
+                            <li>取车：5月1日11:00 (湖畔负责)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+             <div class="card">
+                <h2><i class="fas fa-route icon"></i>自驾路线总览</h2>
+                <div class="timeline mt-4">
+                    <div class="timeline-item">
+                        <p class="font-semibold">南宁东站 → 防城港住宿</p>
+                        <p class="text-sm text-gray-600">距离：约147km | 时间：约1小时45分钟</p>
+                        <p class="text-xs text-gray-500">路线：G75兰海高速 → S7512钦防高速</p>
+                    </div>
+                    <div class="timeline-item">
+                        <p class="font-semibold">防城港 → 崇左住宿</p>
+                        <p class="text-sm text-gray-600">距离：约167km | 时间：约2小时</p>
+                        <p class="text-xs text-gray-500">路线：S85思防高速 → S60合那高速</p>
+                    </div>
+                    <div class="timeline-item">
+                        <p class="font-semibold">崇左 → 南宁住宿</p>
+                        <p class="text-sm text-gray-600">距离：约131km | 时间：约1小时50分钟</p>
+                        <p class="text-xs text-gray-500">路线：G7211南友高速</p>
+                    </div>
+                     <div class="timeline-item">
+                        <p class="font-semibold">总里程</p>
+                        <p class="text-sm text-gray-600">约445km (市内及景点间短途未计入)</p>
+                    </div>
+                </div>
+             </div>
+        </div>
+
+
+        <!-- 第1天：单独一页 -->
+        <div class="section day-section">
+            <div class="card">
+                <h2 class="mb-6"><i class="fas fa-calendar-day icon"></i>第1天：抵达与海滨风情 (5月1日)</h2>
+                 <div class="space-y-4">
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>10:38</strong><i class="fas fa-train-subway"></i></div>
+                        <div class="content">
+                            <p><strong>湖畔抵达南宁东站</strong></p>
+                            <p class="location">G2956次列车</p>
+                            <p class="text-sm text-gray-600">整理行李，准备联系租车公司。</p>
+                        </div>
+                    </div>
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>11:00</strong><i class="fas fa-key"></i></div>
+                        <div class="content">
+                            <p><strong>办理租车手续 (湖畔)</strong></p>
+                            <p class="location">南宁东站北广场地下停车场负二层A2区</p>
+                            <p class="text-sm text-gray-600">建议车型：中型SUV/MPV。检查车辆，核对信息。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>11:06</strong><i class="fas fa-train-subway"></i></div>
+                        <div class="content">
+                            <p><strong>胡青抵达南宁东站</strong></p>
+                            <p class="location">G3569次列车</p>
+                            <p class="text-sm text-gray-600">与湖畔在约定地点汇合。</p>
+                        </div>
+                    </div>
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>11:30</strong><i class="fas fa-users"></i></div>
+                        <div class="content">
+                            <p><strong>全员汇合，装载行李</strong></p>
+                            <p class="location">南宁东站停车场</p>
+                            <p class="text-sm text-gray-600">检查随身物品，准备出发。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>12:00</strong><i class="fas fa-car-side"></i></div>
+                        <div class="content">
+                            <p><strong>自驾前往防城港</strong></p>
+                            <p class="location">导航至：防城港港口阳光海岸3期5栋</p>
+                            <p class="text-sm text-gray-600">车程约1小时45分钟。途中可适时休息。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>13:45</strong><i class="fas fa-bed"></i></div>
+                        <div class="content">
+                            <p><strong>抵达防城港，入住休息</strong></p>
+                            <p class="location">防城港港口阳光海岸3期5栋</p>
+                            <p class="text-sm text-gray-600">办理入住，稍作休整。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>14:30</strong><i class="fas fa-utensils"></i></div>
+                        <div class="content">
+                            <p><strong>午餐</strong></p>
+                            <p class="location">住宿附近</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 渔舍一九七三(金海湾小区店) (地址：冲孔路32-34号)。特色海鲜，人均约60-80元。自驾约5分钟。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>15:30</strong><i class="fas fa-umbrella-beach"></i></div>
+                        <div class="content">
+                            <p><strong>游览西湾旅游区</strong></p>
+                            <p class="location">距离住宿较近，可步行或短途驾车</p>
+                            <p class="text-sm text-gray-600">免费。欣赏海景，沙滩漫步，拍照留念。注意防晒。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>18:00</strong><i class="fas fa-utensils"></i></div>
+                        <div class="content">
+                            <p><strong>晚餐</strong></p>
+                            <p class="location">西湾附近</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 风情岛海鲜餐厅(星光里店) (地址：国贸中心广场西门旁)。本地海鲜，人均约50-70元。自驾约5分钟。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>19:30</strong><i class="fas fa-moon"></i></div>
+                        <div class="content">
+                            <p><strong>自由活动/休息</strong></p>
+                            <p class="location">住宿或西湾夜景</p>
+                            <p class="text-sm text-gray-600">可在西湾欣赏夜景，或返回住宿休息，为第二天行程储备精力。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第2天：单独一页 -->
+        <div class="section day-section">
+             <div class="card">
+                <h2 class="mb-6"><i class="fas fa-calendar-day icon"></i>第2天：沙滩乐趣与边境风光 (5月2日)</h2>
+                 <div class="space-y-4">
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>07:30</strong><i class="fas fa-mug-saucer"></i></div>
+                        <div class="content">
+                            <p><strong>早餐</strong></p>
+                            <p class="location">住宿附近</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 刘叔小炒菜(金海湾小区C3店) (地址：金海湾小区C3组团B区商铺)。本地早餐，人均约15-25元。步行可达。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>08:30</strong><i class="fas fa-suitcase-rolling"></i></div>
+                        <div class="content">
+                            <p><strong>整理行李，退房</strong></p>
+                            <p class="location">防城港港口阳光海岸3期5栋</p>
+                            <p class="text-sm text-gray-600">检查物品，装车，准备前往白浪滩。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>09:00</strong><i class="fas fa-water"></i></div>
+                        <div class="content">
+                            <p><strong>游览白浪滩</strong></p>
+                            <p class="location">距离住宿约20分钟车程</p>
+                            <p class="text-sm text-gray-600">免费。体验宽阔沙滩，适合亲子活动。注意潮汐和安全。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>12:30</strong><i class="fas fa-utensils"></i></div>
+                        <div class="content">
+                            <p><strong>午餐</strong></p>
+                            <p class="location">白浪滩附近</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 风情岛海鲜餐厅港口店 (地址：北部湾大道凯乐路口)。海鲜为主，人均约40-60元。自驾约10-15分钟。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>13:30</strong><i class="fas fa-car-side"></i></div>
+                        <div class="content">
+                            <p><strong>自驾前往崇左</strong></p>
+                            <p class="location">导航至：崇左江州幸福家园小区9栋2单元</p>
+                            <p class="text-sm text-gray-600">车程约2小时。沿途风景不错，可稍作停留。</p>
+                        </div>
+                    </div>
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>15:30</strong><i class="fas fa-bed"></i></div>
+                        <div class="content">
+                            <p><strong>抵达崇左，入住休息</strong></p>
+                            <p class="location">崇左江州幸福家园小区9栋2单元</p>
+                            <p class="text-sm text-gray-600">办理入住，安顿行李。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>17:30</strong><i class="fas fa-utensils"></i></div>
+                        <div class="content">
+                            <p><strong>晚餐</strong></p>
+                            <p class="location">崇左市区</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 康弘羊汤锅(阳光名邸店) (地址：新城路西段阳光名邸B3栋)。特色羊肉，人均约40-60元。自驾约10-15分钟。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>19:00</strong><i class="fas fa-moon"></i></div>
+                        <div class="content">
+                            <p><strong>自由活动/休息</strong></p>
+                            <p class="location">住宿或崇左市区</p>
+                            <p class="text-sm text-gray-600">可在附近散步，感受边城夜生活，或早点休息为明日德天瀑布之行做准备。</p>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+        <!-- 第3天：单独一页 -->
+        <div class="section day-section">
+            <div class="card">
+                <h2 class="mb-6"><i class="fas fa-calendar-day icon"></i>第3天：跨国瀑布与田园牧歌 (5月3日)</h2>
+                <div class="space-y-4">
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>07:00</strong><i class="fas fa-mug-saucer"></i></div>
+                        <div class="content">
+                            <p><strong>早餐</strong></p>
+                            <p class="location">住宿附近</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 日日是小满(崇左店) (地址：龙胤财富广场)。本地简餐，人均约10-20元。自驾约10分钟。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>07:30</strong><i class="fas fa-car-side"></i></div>
+                        <div class="content">
+                            <p><strong>出发前往德天瀑布</strong></p>
+                            <p class="location">导航至：德天跨国瀑布景区</p>
+                            <p class="text-sm text-gray-600">车程约1.5小时。早出发避开人流高峰。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>09:00</strong><i class="fas fa-waterfall"></i></div>
+                        <div class="content">
+                            <p><strong>游览德天跨国瀑布</strong></p>
+                            <p class="location">德天跨国瀑布景区</p>
+                            <p class="text-sm text-gray-600">门票：80元/人(含环保车)。感受亚洲第一大跨国瀑布的壮观。可乘竹筏近距离观赏。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>12:30</strong><i class="fas fa-utensils"></i></div>
+                        <div class="content">
+                            <p><strong>午餐</strong></p>
+                            <p class="location">德天瀑布景区附近</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 三餐四季·东南亚创意餐厅 (地址：北环路276号)。特色农家菜，人均约30-50元。自驾约10-15分钟。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>13:30</strong><i class="fas fa-car-side"></i></div>
+                        <div class="content">
+                            <p><strong>前往明仕田园</strong></p>
+                            <p class="location">导航至：明仕田园景区</p>
+                            <p class="text-sm text-gray-600">车程约1小时。</p>
+                        </div>
+                    </div>
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>14:30</strong><i class="fas fa-seedling"></i></div>
+                        <div class="content">
+                            <p><strong>游览明仕田园</strong></p>
+                            <p class="location">明仕田园景区</p>
+                            <p class="text-sm text-gray-600">门票：100元/人(含竹筏)。体验“小桂林”的山水田园风光，乘竹筏漂流。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>17:30</strong><i class="fas fa-car-side"></i></div>
+                        <div class="content">
+                            <p><strong>返回崇左住宿</strong></p>
+                            <p class="location">导航至：崇左江州幸福家园小区</p>
+                            <p class="text-sm text-gray-600">车程约1小时20分钟。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>19:00</strong><i class="fas fa-utensils"></i></div>
+                        <div class="content">
+                            <p><strong>晚餐</strong></p>
+                            <p class="location">崇左市区</p>
+                             <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 一品螺鲜(东源名城店) (地址：东源名城D3栋)。特色螺蛳粉及小吃，人均约50-80元。自驾约10-15分钟。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第4天：单独一页 -->
+        <div class="section day-section">
+            <div class="card">
+                <h2 class="mb-6"><i class="fas fa-calendar-day icon"></i>第4天：返回绿城与城市绿肺 (5月4日)</h2>
+                 <div class="space-y-4">
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>07:30</strong><i class="fas fa-mug-saucer"></i></div>
+                        <div class="content">
+                            <p><strong>早餐</strong></p>
+                            <p class="location">住宿附近</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 广雅云吞(崇左店) (地址：东源名城4区)。广式早点，人均约10-20元。自驾约10分钟。</p>
+                        </div>
+                    </div>
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>08:30</strong><i class="fas fa-suitcase-rolling"></i></div>
+                        <div class="content">
+                            <p><strong>整理行李，退房</strong></p>
+                            <p class="location">崇左江州幸福家园小区</p>
+                            <p class="text-sm text-gray-600">检查物品，准备返回南宁。</p>
+                        </div>
+                    </div>
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>09:00</strong><i class="fas fa-car-side"></i></div>
+                        <div class="content">
+                            <p><strong>自驾返回南宁</strong></p>
+                            <p class="location">导航至：南宁东站万象城东盟国际18</p>
+                            <p class="text-sm text-gray-600">车程约1小时50分钟。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>11:00</strong><i class="fas fa-bed"></i></div>
+                        <div class="content">
+                            <p><strong>抵达南宁，入住休息</strong></p>
+                            <p class="location">南宁东站万象城东盟国际18</p>
+                            <p class="text-sm text-gray-600">办理入住，稍作调整。</p>
+                        </div>
+                    </div>
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>12:00</strong><i class="fas fa-utensils"></i></div>
+                        <div class="content">
+                            <p><strong>午餐</strong></p>
+                            <p class="location">南宁市区</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 桂小厨广西菜(水晶城店) (地址：金湖广场梦之岛水晶城B1层)。品尝地道广西菜，人均约50-80元。自驾约15-20分钟。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>13:30</strong><i class="fas fa-mountain-sun"></i></div>
+                        <div class="content">
+                            <p><strong>游览青秀山风景区</strong></p>
+                            <p class="location">青秀山风景区</p>
+                            <p class="text-sm text-gray-600">门票：20元/人。南宁“绿肺”，登高望远，赏花观景，放松身心。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>17:00</strong><i class="fas fa-utensils"></i></div>
+                        <div class="content">
+                            <p><strong>晚餐</strong></p>
+                            <p class="location">南宁市区</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 诚如金·南宁本地菜(金源CBD店) (地址：金湖路金源名店中心F2)。环境较好，本地特色菜，人均约60-90元。自驾约20-25分钟。</p>
+                        </div>
+                    </div>
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>19:00</strong><i class="fas fa-moon"></i></div>
+                        <div class="content">
+                            <p><strong>自由活动/休息</strong></p>
+                            <p class="location">南宁市区或住宿</p>
+                            <p class="text-sm text-gray-600">可逛逛万象城，或在南湖公园散步，感受南宁夜景。</p>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+        <!-- 第5天：单独一页 -->
+        <div class="section day-section">
+            <div class="card">
+                <h2 class="mb-6"><i class="fas fa-calendar-day icon"></i>第5天：告别南宁，温馨返程 (5月5日)</h2>
+                 <div class="space-y-4">
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>07:00</strong><i class="fas fa-mug-saucer"></i></div>
+                        <div class="content">
+                            <p><strong>早餐</strong></p>
+                            <p class="location">住宿附近</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 东铁餐厅 (地址：长虹路70号)。靠近南宁东站，方便快捷，人均约10-20元。步行或短途驾车。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>07:30</strong><i class="fas fa-suitcase-rolling"></i></div>
+                        <div class="content">
+                            <p><strong>整理行李，准备出发</strong></p>
+                            <p class="location">南宁东站万象城东盟国际18</p>
+                            <p class="text-sm text-gray-600">检查物品，根据不同车次安排送站。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>08:00</strong><i class="fas fa-car-side"></i></div>
+                        <div class="content">
+                            <p><strong>送胡青前往南宁北站</strong></p>
+                            <p class="location">导航至：南宁北站</p>
+                            <p class="text-sm text-gray-600">车程约30分钟，提前出发避免拥堵。</p>
+                        </div>
+                    </div>
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>09:00</strong><i class="fas fa-train"></i></div>
+                        <div class="content">
+                            <p><strong>胡青返程 (南宁北站)</strong></p>
+                            <p class="location">G3576次列车</p>
+                            <p class="text-sm text-gray-600">注意核对车次站台信息，祝旅途愉快！</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>09:15</strong><i class="fas fa-undo-alt"></i></div>
+                        <div class="content">
+                            <p><strong>湖畔前往南宁东站还车点</strong></p>
+                            <p class="location">南宁东站北广场地下停车场负二层A2区</p>
+                            <p class="text-sm text-gray-600">预留充足时间办理还车手续。</p>
+                        </div>
+                    </div>
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>09:30</strong><i class="fas fa-key"></i></div>
+                        <div class="content">
+                            <p><strong>办理还车手续</strong></p>
+                            <p class="location">南宁东站租车点</p>
+                            <p class="text-sm text-gray-600">与工作人员交接，检查车辆，确认费用，索取凭证。</p>
+                        </div>
+                    </div>
+                     <div class="detail-item">
+                        <div class="time-icon"><strong>10:00</strong><i class="fas fa-utensils"></i></div>
+                        <div class="content">
+                            <p><strong>午餐 (湖畔)</strong></p>
+                            <p class="location">南宁东站内或附近</p>
+                            <p class="recommendation">推荐：<i class="fas fa-star text-yellow-500 text-xs"></i> 桂大山油茶餐厅 (地址：云景路28号)。车站附近，简餐，人均约15-30元。自驾约5-10分钟。</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="time-icon"><strong>11:18</strong><i class="fas fa-train"></i></div>
+                        <div class="content">
+                            <p><strong>湖畔返程 (南宁东站)</strong></p>
+                            <p class="location">G417次列车</p>
+                            <p class="text-sm text-gray-600">行程结束，期待下次相聚！</p>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 脚本 (无需地图相关脚本) -->
+    <script>
+        // 如有其他交互脚本可放在这里
+    </script>
+</body>
+</html>
